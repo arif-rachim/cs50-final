@@ -23,7 +23,7 @@ export type Library = { [key: string]: LabeledFaceDescriptors };
 export async function loadLibrary(): Promise<Library> {
     const descriptor_file = path.join(process.cwd(), 'descriptors.json');
     const content = await fs.promises.readFile(descriptor_file, {encoding: 'utf-8'});
-    let library: Library = {};
+    let library: any = {};
     if (content) {
         const ctn = JSON.parse(content);
         Object.keys(ctn).forEach(key => {
