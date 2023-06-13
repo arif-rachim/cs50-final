@@ -18,23 +18,25 @@ export async function initFaceApi() {
     isLoaded = true;
 }
 
-export async function loadLibrary(): Promise<{ [key: string]: LabeledFaceDescriptors }> {
+export type Library = { [key: string]: LabeledFaceDescriptors };
+
+export async function loadLibrary(): Promise<Library> {
     const descriptor_file = path.join(process.cwd(), 'descriptors.json');
     const content = await fs.promises.readFile(descriptor_file, {encoding: 'utf-8'});
-    let library = {};
+    let library: Library = {};
     if (content) {
         const ctn = JSON.parse(content);
         Object.keys(ctn).forEach(key => {
-            const descriptors = ctn[key].descriptors.map((f:number[]) => {
+            const descriptors = ctn[key].descriptors.map((f: number[]) => {
                 return new Float32Array(f)
             });
-            library[key] = new LabeledFaceDescriptors(key,descriptors);
+            library[key] = new LabeledFaceDescriptors(key, descriptors);
         })
     }
     return library;
 }
 
-export async function saveLibrary(library: { [key: string]: LabeledFaceDescriptors }) {
+export async function saveLibrary(library: Library) {
     const descriptor_file = path.join(process.cwd(), 'descriptors.json');
     await fs.promises.writeFile(descriptor_file, JSON.stringify(library, null, 4));
 }

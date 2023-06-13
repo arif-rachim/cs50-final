@@ -1,13 +1,13 @@
 "use server"
 
-import {initFaceApi, loadLibrary} from "@/app/initFaceApi";
+import {initFaceApi, Library, loadLibrary} from "@/app/initFaceApi";
 import {canvas} from "@/commons";
 import * as faceapi from "@vladmandic/face-api"
 import {FaceMatcher, LabeledFaceDescriptors} from "@vladmandic/face-api";
 
 export async function detectPhoto(dataUri:string){
     await initFaceApi();
-    const library = await loadLibrary();
+    const library:Library = await loadLibrary();
     const image:any = await canvas.loadImage(dataUri);
     const canva = faceapi.createCanvasFromMedia(image);
     const displaySize = {width:image.width,height:image.height};

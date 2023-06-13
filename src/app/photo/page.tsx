@@ -8,7 +8,7 @@ import Image from "next/image";
 const requiredPictures = 3;
 const label = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth']
 export default function Page() {
-    const [state, setState] = useState({
+    const [state, setState] = useState<{pictures:string[]}>({
         pictures: []
     });
     const pictureIsEnough = state.pictures.length === requiredPictures;
@@ -19,9 +19,6 @@ export default function Page() {
                 <form className={'flex flex-col gap-3 p-10 w-full box-border'} action={savePhoto}>
                     <div className={'flex w-full box-border'}>
                         {state.pictures.map((p, index) => {
-                            if (p === '') {
-                                p = null;
-                            }
                             return <div className={`w-1/${requiredPictures} box-borders p-5`} key={index}>
                                 <Image src={p} alt={`Person ${label[index]} image`}/>
                                 <input type={'hidden'} name={`photo-${index}`} value={p}/>
