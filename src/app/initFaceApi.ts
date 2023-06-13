@@ -25,7 +25,7 @@ export async function loadLibrary(): Promise<{ [key: string]: LabeledFaceDescrip
     if (content) {
         const ctn = JSON.parse(content);
         Object.keys(ctn).forEach(key => {
-            const descriptors = ctn[key].descriptors.map(f => {
+            const descriptors = ctn[key].descriptors.map((f:number[]) => {
                 return new Float32Array(f)
             });
             library[key] = new LabeledFaceDescriptors(key,descriptors);

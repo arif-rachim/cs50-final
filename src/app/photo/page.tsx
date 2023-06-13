@@ -3,6 +3,7 @@ import Camera from "react-html5-camera-photo";
 import 'react-html5-camera-photo/build/css/index.css';
 import {savePhoto} from "@/app/photo/savePhoto";
 import {useState} from "react";
+import Image from "next/image";
 
 const requiredPictures = 3;
 const label = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth']
@@ -22,7 +23,7 @@ export default function Page() {
                                 p = null;
                             }
                             return <div className={`w-1/${requiredPictures} box-borders p-5`} key={index}>
-                                <img src={p} alt={`Person ${label[index]} image`}/>
+                                <Image src={p} alt={`Person ${label[index]} image`}/>
                                 <input type={'hidden'} name={`photo-${index}`} value={p}/>
                             </div>
                         })}
