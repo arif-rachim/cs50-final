@@ -20,7 +20,7 @@ export default function Page() {
                     <div className={'flex w-full box-border'}>
                         {state.pictures.map((p, index) => {
                             return <div className={`w-1/${requiredPictures} box-borders p-5`} key={index}>
-                                <Image src={p} alt={`Person ${label[index]} image`}/>
+                                <Image src={p} alt={`Person ${label[index]} image`} width={100} height={100}/>
                                 <input type={'hidden'} name={`photo-${index}`} value={p}/>
                             </div>
                         })}
